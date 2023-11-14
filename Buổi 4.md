@@ -1,4 +1,4 @@
-##Buổi 4
+## Buổi 4
 ### Tính đóng gói trong java.
 - Khái niệm: 
     - Tính đóng gói trong java là kỹ thuật **ẩn giấu thông tin không liên quan** và **hiển thị ra thông tin liên quan**.
