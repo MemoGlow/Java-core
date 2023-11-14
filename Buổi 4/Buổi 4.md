@@ -187,9 +187,8 @@
      ```
      running safely with 60km
      ```
- - Đa hình trong lúc biên dịch (compile). Tính đa hình được sử dụng bằng cách nạp chồng hàm (overloading).
-   - Nạp chồng hàm:
-     - Ta có thể sử dụng cùng một tên gọi cho các hàm "Giống nhau" (cùng mục đích) nhưng phải khác nhau về kiểu dữ liệu tham số hoặc số lượng tham số.
+   - Đa hình trong lúc biên dịch (compile). Tính đa hình được sử dụng bằng cách nạp chồng hàm (overloading).
+     - Nạp chồng hàm: Ta có thể sử dụng cùng một tên gọi cho các hàm "Giống nhau" (cùng mục đích) nhưng phải khác nhau về kiểu dữ liệu tham số hoặc số lượng tham số.
      - Nạp chồng hàm cho phép ta khai báo và định nghĩa các hàm trên với cùng một tên gọi.
      - Ví dụ:
       ```Java
