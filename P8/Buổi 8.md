@@ -7,7 +7,7 @@ Sử dụng một số hàm của cấu trúc dữ liệu như sort. -->
    - Cấu trúc dữ liệu là cách mà chúng ta sắp xếp, thao tác, truy cập, và lưu trữ dữ liệu.
    - Cấu trúc dữ liệu có nhiều dạng đơn giản và phức tạp, thường được sử dụng để tổ chức dữ liệu tùy theo cách sử dụng nhất định.
    - Cấu trúc dữ liệu giúp chúng ta truy cập và sử dụng dữ liệu một cách dễ dàng hơn.
-## 2. Java Collection frame work.
+## 2. Java Collection framework.
 ![Alt text](image-3.png)
 ## 3. Interface iterable, Collection, list, set, queue.
    1. Iterable interface.
