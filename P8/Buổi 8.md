@@ -16,6 +16,7 @@ Sử dụng một số hàm của cấu trúc dữ liệu như sort. -->
          - Các phần tử của collections như mảng, sets, queues, maps,... cũng có thể duyệt qua một cách dễ dàng sử dụng Iterable interface.
          - Bằng cách sử dụng **iterator**, chúng ta có thể truy cập các phần tử trong collection. 
       - **Hệ thống phân cấp.**
+      
       ![Collections Hiearachy](image-2.png)  
       - **Về Iterator và Iterable:**
          - Mỗi class mà implement interface Iterable đều được ghi đè phương thức Iterator(). 
