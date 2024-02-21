@@ -43,5 +43,7 @@
         - **Trường hợp 2:** chứa try-finally.
             - **Khi có ngoại lệ**
                 - Lệnh trong final sẽ được thực thi, sau đó sẽ được JVM xử lý.
+            - **Không có ngoại lệ**
+                - Lệnh trong try, final được thực thi, sau đó là chương trình còn lại.
 
 
