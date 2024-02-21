@@ -19,7 +19,7 @@
 1. **Xử lý ngoại lệ trong Java:**
     - Khối lệnh try trong java được sử dụng để chứa một đoạn code có thế xảy ra một ngoại lệ. Nó phải được khai báo trong phương thức.
     - Sau một khối lệnh try bạn phải khai báo khối lệnh catch hoặc finally hoặc cả hai.
-1. **Sử dụng khối lệnh try, catch, final.**
+1. **Sử dụng khối lệnh try, catch**
     - Cú pháp:
     ``` java
     try{
@@ -30,20 +30,135 @@
         // code trong này luôn được thực thi.
     }
     ```
-    - Luồng hoạt động của khối lệnh try catch finally.
-        - **Trường hợp 1:** Chứa try-catch hoặc try-catch-finally. 
-            - **Ngoại lệ có trong khối try và được xử lý trong khối catch:** 
-                - Khi đó khối try sẽ không được thực thi mà lệnh ở khối catch sẽ được thực thi. 
-                - Sau khi khối catch được thực thi thì khối finally (nếu có) sẽ được thực thi. Chương trình tiếp tục chạy như bình thường.   
-            - **Ngoại lệ có trong khối try và không được xử lý trong khối catch:**
-                - Khối finally (nếu có) sẽ được thực thi, sau đó sẽ được JVM xử lý.
-            - **Ngoại lệ không có trong khối try.**
-                - Khối catch block sẽ không được thực thi.
-                - Khối finally (nếu có) sẽ được thực thi, sau đó chương trình tiếp tục chạy bình thường.
-        - **Trường hợp 2:** chứa try-finally.
-            - **Khi có ngoại lệ**
-                - Lệnh trong final sẽ được thực thi, sau đó sẽ được JVM xử lý.
-            - **Không có ngoại lệ**
-                - Lệnh trong try, final được thực thi, sau đó là chương trình còn lại.
+    - Ví dụ:
+    ``` Java
+    public class Main {
+        public static void main(String[] args) {
+            int a[] = new int[5];
+            try{
+                System.out.println("Start");
+                System.out.println(a[5]);
+            }catch (ArrayIndexOutOfBoundsException e){
+                System.out.println("Catch Block");
+            }
+        }
+    }
+    ```
+    ```
+    Output:
+    Start
+    Catch Block
+    ```
+1. **Khối lệnh finally**
+    - Được sử dụng để thực thi các lệnh quan trọng như đóng kết nối,...
+    - Khối lệnh finally trong java luôn được thực thi cho dù có ngoại lệ xảy ra hay không hoặc gặp lệnh return trong khối try.
+    - Ví dụ:
+    ```Java
+    public class Main {
+        public static void main(String[] args) {
+            int a[] = new int[5];
+            try{
+                System.out.println(a[5]);
+                
+            }catch (ArrayIndexOutOfBoundsException e){
+                System.out.println("Catch Block");
+                return;
+            }finally{
+                System.out.println("Done");
+            }
+        }
+    }
+    ```
+    ```
+    Output:
+    Catch Block
+    Done
+    ```
+### 3. Cây phân cấp exception, từ khóa throw và throws.
+1. Cây phân cấp exception:
+    - Đặc điểm:
+        - Class ở mức cao nhất là Throwable.
+        - Hai class con trực tiếp là Error và Exception.
+        - Trong nhánh Exception có nhánh con RunTimeException là ngoại lệ sẽ không được Java kiểm tra tại thời điểm biên dịch.
+    ![Cây phân cấp](Exception_Classes.png)
+2. Từ khóa throw và throws.
+    - Từ khóa throw:
+        - Được sử dụng để ném ra một ngoại lệ cụ thể.
+        - Chủ yếu được sử dụng để ném ra ngoại lệ tùy chỉnh.
+        - Cú pháp:
+        ```Java
+            throw exception;
+        ```
+        Ví dụ:
+    - Từ khóa throws:
+        - Được sử dụng để khai báo ngoại lệ.
+        - Thể hiện thông tin rằng có thể xảy ra một ngoại lệ trong một phương thức (ngoại lệ ở đây chủ yếu là checked exception).
+        - Chủ yếu được sử dụng để xử lý ngoại lệ checked bởi vì ngoại lệ Unchecked đã trong tầm kiểm soát.
+        - Cú pháp:
+        ```Java
+        return_type method_name() throws exception_class_name {
+            // method code
+        }
+        ```
+### 4. Custom exception.
+- Custom exception là ngoại lệ do người dùng tự định nghĩa
+- Thông thường, để tạo custom exception thuộc loại checked thì ta kế thừa lớp exception. Để tạo custom exception thuộc loại unchecked chúng ta kế thừa từ lớp RunTimeException.
+- Ví dụ:
+    - Custom Checked Exception:
+    ```Java
+    class InvalidAgeException extends Exception {
+        InvalidAgeException(String s) {
+            super(s);
+        }
+    }
+    class CustomExceptionExample {
+    
+        static void validate(int age) throws InvalidAgeException {
+            if (age < 18) {
+                throw new InvalidAgeException("not valid");
+            } else {
+                System.out.println("welcome to vote");
+            }
+        }
+    
+        public static void main(String args[]) {
+            try {
+                validate(13);
+            } catch (Exception m) {
+                System.out.println("Exception occured: " + m);
+            }
+    
+            System.out.println("rest of the code...");
+        }
+    }
+    ```
+    - Custom UnChecked Exception
+    ```Java
+    class InvalidAgeException extends RuntimeException {
+        InvalidAgeException(String s) {
+            super(s);
+        }
+    }
+    class CustomExceptionExample {
+    
+        static void validate(int age) {
+            if (age < 18) {
+                throw new InvalidAgeException("not valid");
+            } else {
+                System.out.println("welcome to vote");
+            }
+        }
+    
+        public static void main(String args[]) {
+            try {
+                validate(13);
+            } catch (Exception m) {
+                System.out.println("Exception occured: " + m);
+            }
+    
+            System.out.println("rest of the code...");
+        }
+    }
+    ```
 
 

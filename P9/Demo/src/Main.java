@@ -1,8 +1,13 @@
+
 public class Main {
-    public static void main(String[] args)
-        throws InterruptedException
-    {
-        Thread.sleep(10000);
-        System.out.println("Hello Geeks");
+    public static void main(String[] args) {
+        int a[] = new int[5];
+        try{
+            System.out.println("Start");
+            System.out.println(a[5]);
+        }catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Catch Block");
+        }
     }
 }
+
