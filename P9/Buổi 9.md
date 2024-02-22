@@ -5,7 +5,7 @@
     - Error là các lỗi nghiêm trọng của chương trình.
     - Exception là lỗi chương trình được phát hiện và có thể xử lý.
 - Phân loại exception:
-    - Checked exception: là những exception phải xử lý ngay khi viết code, bởi nó được kiểm tra bởi chính trình biên dịch.
+    - Checked exception: là những excepvtion phải xử lý ngay khi viết code, bởi nó được kiểm tra bởi chính trình biên dịch.
         - Ví dụ: ClassNotFoundException,...
     - Unchecked exception: là exception xảy ra khi chương trình chạy nghĩa là trình biên dịch không phát hiện ra biên dịch nên không thể xử lý khi viết code.
         - Ví dụ: NullPointerException, ArrayIndexOutOfBoundException,...
@@ -26,8 +26,6 @@
         // Khối lệnh có thể ném ra ngoại lệ.
     }catch(Exception_class_name ex){
         // code xử lý ngoại lệ.
-    }final{
-        // code trong này luôn được thực thi.
     }
     ```
     - Ví dụ:
@@ -90,6 +88,28 @@
             throw exception;
         ```
         Ví dụ:
+        ``` Java
+        class ValidLengthException extends RuntimeException{
+            ValidLengthException(String s){
+                super(s);
+            }
+        }
+        public class Main2 {
+            public static void printLength(double len){
+                if(len < 0){
+                    throw new ValidLengthException("Do dai khong hop le");
+                }
+                System.out.println("Do dai la: " + len);
+            }
+            public static void main(String[] args) {
+                try{
+                    printLength(-2);
+                }catch (ValidLengthException e){
+                    System.out.println(e);
+                }
+            }
+        }
+        ```
     - Từ khóa throws:
         - Được sử dụng để khai báo ngoại lệ.
         - Thể hiện thông tin rằng có thể xảy ra một ngoại lệ trong một phương thức (ngoại lệ ở đây chủ yếu là checked exception).
@@ -99,6 +119,30 @@
         return_type method_name() throws exception_class_name {
             // method code
         }
+        ```
+        - Ví dụ:
+        ``` Java
+        class Test{
+            void readFile() throws FileNotFoundException {
+                FileReader file = new FileReader("data.txt");
+                String s = file.toString();
+                System.out.println(s);
+            }
+        }
+        public class Main{
+            public static void main(String[] args)  {
+                Test obj = new Test();
+                try{
+                    obj.readFile();
+                }catch(FileNotFoundException e){
+                    System.out.println("Caught");
+                }
+            }
+        }
+        ```
+        ```
+        Output:
+        Caught
         ```
 ### 4. Custom exception.
 - Custom exception là ngoại lệ do người dùng tự định nghĩa
