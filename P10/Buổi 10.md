@@ -75,6 +75,18 @@
             - Không nên sử dụng Assertions để thay thế thông báo lỗi.
             - Không nên sử dụng để kiểm tra lỗi ở các phương thức public bởi chúng có thể gây ra do người dùng. Khi đó chúng ta nên để người dùng tự xử lý lỗi.
             - Assertions không nên sử dụng trên các tham số do người dùng nhập.
+## Unit test.
+- Khái niệm:
+    - Trong kiểm thử phần mềm có 4 mức độ: Unit test ( kiểm thử mức đơn vị), Intergration test ( kiểm thử tích hợp), System test (kiểm thử hệ thống), Acceptance test (kiểm thử chấp nhận).
+    - Unit test là mức độ kiểm thử nhỏ nhất trong quá trình trên. Unit test bao gồm kiểm thử method, class, module,...
+    - Unit test được thực hiện bởi lập trình viên.
+- Lợi ích của Unit test.
+    - Viết Unit test tốt giúp tăng sự tin tưởng vào mã nguồn được thay đổi hoặc bảo trì.
+    - Kiểm thử từng thành phần riêng rẽ của dự án mà không cần đợi các thành phần khác hoàn thành.
+    - Dễ dàng khoanh vùng và sửa chữa do thực hiện kiểm thử trên từng đơn vị nhỏ và các module riêng rẽ.
+    - Có thể tái sử dụng.
+    - Chi phí cho Unit test ít hơn.
+    - Mã nguồn tốt nếu viết Unit test tốt.
     
         
 
