@@ -182,7 +182,6 @@
         - Khi ta không sử dụng Assertion.
         ![alt text](image-1.png)
 - Tác dụng của Assertions.
-    - Đảm bảo rằng các đoạn code không thể đạt được không thể đạt được.
     - Đảm bảo các giả thiết trong comment là đúng.
     - Về cách sử dụng Assertions.
         - Nên sử dụng assertion ở.
