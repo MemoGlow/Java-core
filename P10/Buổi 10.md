@@ -48,14 +48,27 @@
             false // nếu không tồn tại file để xóa.
             ```
     2. Đọc và ghi file trong Java.
+        <!-- File nhị phân và file text được sử dụng khi nào. -->
         - File nhị phân.
             - Ta sử dụng class **FileInputStream** để đọc file.
             ```Java
-            
+            public class Main {
+                public static void main(String[] args) {
+                    try{
+                        Scanner sc = new Scanner(new FileInputStream("test.txt"));
+                        String s = sc.nextLine();
+                        System.out.println(s);
+                    }catch (FileNotFoundException e){
+                        System.out.println("File khong ton tai");
+                    }catch (NoSuchElementException e){
+                        System.out.println("File khong co data");
+                    }
+                }
+            }
             ```
-            - Ta sử dụng class **FileOutputStream** để ghi file.
+            - Ta sử dụng class **FileOutputStream** để ghi file. Khi ghi file thì phải chuyển String sang default charset sử dụng hàm getBytes().
             ```Java
-
+            public clas     
             ```
         - File văn bản:
             - Ta sử dụng class **FileReader** để đọc file.
@@ -89,21 +102,20 @@
             ```
             ```Java
             public class Main {
-                public static void main(String[] args) throws IOexception {
-                    FileWriter fw = null;
+                public static void main(String[] args) {
+
                     try{
-                        fw = new FileWriter("test.txt");
+                        FileWriter fw = new FileWriter("test.txt");
                         fw.write("1 2 3 4 5 6 7 8 9 10");
                         Scanner sc = new Scanner(new FileReader("test.txt"));
                         System.out.println(sc.nextLine());
+                        fw.close();
                     }catch (FileNotFoundException e){
                         System.out.println("File khong ton tai");
                     }catch (NoSuchElementException e){
                         System.out.println("File khong co data");
                     }catch (IOException e){
                         System.out.println(e);
-                    }finally{
-                        fw.close();
                     }
                 }
             }
