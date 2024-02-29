@@ -68,10 +68,31 @@
             ```
             - Ta sử dụng class **FileOutputStream** để ghi file. Khi ghi file thì phải chuyển String sang default charset sử dụng hàm getBytes().
             ```Java
-            public clas     
+            public class Main {
+                public static void main(String[] args) {
+
+                    try{
+                        FileOutputStream fw = new FileOutputStream("test.txt");
+                        fw.write("1 2 3 4 5 6 7 8 9 10".getBytes());
+                        Scanner sc = new Scanner(new FileReader("test.txt"));
+                        System.out.println(sc.nextLine());
+                        fw.close();
+                    }catch (FileNotFoundException e){
+                        System.out.println("File khong ton tai");
+                    }catch (NoSuchElementException e){
+                        System.out.println("File khong co data");
+                    }catch (IOException e){
+                        System.out.println(e);
+                    }
+                }
+            }
             ```
         - File văn bản:
             - Ta sử dụng class **FileReader** để đọc file.
+                |Phương thức|Tác dụng|
+                |---|---|
+                |close()|Đóng FileReader, được thực hiện sau cùng.|
+                |read()|Đọc 1 hay nhiều ký tự từ file, trả về -1 nếu không còn gì để đọc|
             ```
             Nội dung file test.txt
             1 2 3 4 5 6 7 8 9 10 
@@ -96,6 +117,10 @@
             1 2 3 4 5 6 7 8 9 10
             ```
             - Ta sử dụng class **FileWriter** để ghi file.
+                |Phương thức|Tác dụng|
+                |---|---|
+                |close()|Đóng FileReader, thường được sử dụng khi đã hoàn thành|
+                |write()|Để ghi một chuỗi hoặc ký tự vào file|
             <!-- Tự tạo file thì không ghi được file, nhưng để máy tạo lại oke -->
             ```
             File test.txt không tồn tại.
