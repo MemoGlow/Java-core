@@ -9,7 +9,7 @@
     1. Một số phương thức của class File.
         |Phương thức|Mô tả|
         |---|---|
-        |createNewFiile()| Tạo file mới|
+        |createNewFiile()| Tạo file mới, Trả về true nếu file được tạo chưa tồn tại, trả về false nếu file được tạo đã được tạo|
         |canRead()|Kiểm tra khả năng đọc file|
         |canWrite()|Kiểm tra khả năng ghi file|
         |delete()|Xóa file|
@@ -17,9 +17,36 @@
         - Một số ví dụ.
             - Tạo file.
             ```Java
-            
+            public class Main {
+                public static void main(String[] args) {
+                    File a = new File("test.txt");
+                    try{
+                        System.out.println(a.createNewFile());
+                    }catch (IOException e){
+                        System.out.println("Caught");
+                    }
+                }
+            }
+            ```
+            ```Command prompt
+            Output: // file test mới được tạo.
+            true // nếu chưa có file test tồn tại.
+            false // nếu file test đã tồn tại.
             ```
             - Xóa file.
+            ```Java
+            public class Main {
+                public static void main(String[] args) {
+                    File a = new File("test.txt");
+                    System.out.println(a.delete());
+                }
+            }
+            ```
+            ```
+            Output: //file test được xóa.//
+            true // nếu có tồn tại file để xóa.
+            false // nếu không tồn tại file để xóa.
+            ```
     2. Đọc và ghi file trong Java.
         - File nhị phân.
             - Ta sử dụng class **FileInputStream** để đọc file.
@@ -32,18 +59,72 @@
             ```
         - File văn bản:
             - Ta sử dụng class **FileReader** để đọc file.
+            ```
+            Nội dung file test.txt
+            1 2 3 4 5 6 7 8 9 10 
+            ```
             ```Java
-            
+            public class Main {
+                public static void main(String[] args) {
+                    try{
+                        Scanner sc = new Scanner(new FileReader("test.txt"));
+                        String s = sc.nextLine();
+                        System.out.println(s);
+                    }catch (FileNotFoundException e){
+                        System.out.println("File khong ton tai");
+                    }catch (NoSuchElementException e){
+                        System.out.println("File khong co data");
+                    }
+                }
+            }
+            ```
+            ```
+            Output: 
+            1 2 3 4 5 6 7 8 9 10
             ```
             - Ta sử dụng class **FileWriter** để ghi file.
+            <!-- Tự tạo file thì không ghi được file, nhưng để máy tạo lại oke -->
+            ```
+            File test.txt không tồn tại.
+            ```
             ```Java
-            
+            public class Main {
+                public static void main(String[] args) throws IOexception {
+                    FileWriter fw = null;
+                    try{
+                        fw = new FileWriter("test.txt");
+                        fw.write("1 2 3 4 5 6 7 8 9 10");
+                        Scanner sc = new Scanner(new FileReader("test.txt"));
+                        System.out.println(sc.nextLine());
+                    }catch (FileNotFoundException e){
+                        System.out.println("File khong ton tai");
+                    }catch (NoSuchElementException e){
+                        System.out.println("File khong co data");
+                    }catch (IOException e){
+                        System.out.println(e);
+                    }finally{
+                        fw.close();
+                    }
+                }
+            }
+            ```
+            ```
+            Output:
+            1 2 3 4 5 6 7 8 9 10
             ```
 ## Assertions
 - Tổng quan:
     - Câu lệnh Assertion giúp phát hiện lỗi bằng cách kiểm tra đoạn code mà người lập trình cho là đúng.
     - Ta có thể sử dụng Assertion trong Java bằng cách sử dụng từ kháo assert.
     - Khi thực thi assertion, mặc định sẽ được cho là đúng. Nếu sai thì JVM sẽ ném ra AssertionError.
+- Cách sử dụng Assertions.
+    - Cú pháp.
+        ```Java
+        assert expression;
+        ```
+        ```Java
+        assert expression1 : expression2;
+        ```
     - Thông thường, assertion thường bị tắt, để chạy được ta phải thực hiện câu lệnh trong terminal.
         Ta sử dụng cú pháp.         
         ```bash
@@ -63,15 +144,15 @@
         ![alt text](image.png)
         - Khi ta không sử dụng Assertion.
         ![alt text](image-1.png)
-- Cách sử dụng Assertion.
+- Tác dụng của Assertions.
     - Đảm bảo rằng các đoạn code không thể đạt được không thể đạt được.
     - Đảm bảo các giả thiết trong comment là đúng.
-    - Vị trí sử dụng Assertions.
+    - Về cách sử dụng Assertions.
         - Nên sử dụng assertion ở.
             - Các đối số của hàm private. Các đối số này chỉ được cung cấp bởi lập trình viên và lập trình viên đó muốn kiểm tra các giả thiết của mình.
             - Các câu điều kiện.
             - Điều kiện tại phần mở đầu của các phương thức.
-        - Không nên sử dụng Assertions ở.
+        - Lưu ý.
             - Không nên sử dụng Assertions để thay thế thông báo lỗi.
             - Không nên sử dụng để kiểm tra lỗi ở các phương thức public bởi chúng có thể gây ra do người dùng. Khi đó chúng ta nên để người dùng tự xử lý lỗi.
             - Assertions không nên sử dụng trên các tham số do người dùng nhập.
