@@ -55,13 +55,14 @@
             public class Main {
                 public static void main(String[] args) {
                     try{
-                        Scanner sc = new Scanner(new FileInputStream("test.txt"));
-                        String s = sc.nextLine();
-                        System.out.println(s);
+                        FileInputStream fi = new FileInputStream("test.txt");
+                        System.out.println((char)fi.read());
                     }catch (FileNotFoundException e){
                         System.out.println("File khong ton tai");
                     }catch (NoSuchElementException e){
                         System.out.println("File khong co data");
+                    } catch (IOException e) {
+                        System.out.println(e);
                     }
                 }
             }
@@ -74,7 +75,7 @@
                     try{
                         FileOutputStream fw = new FileOutputStream("test.txt");
                         fw.write("1 2 3 4 5 6 7 8 9 10".getBytes());
-                        Scanner sc = new Scanner(new FileReader("test.txt"));
+                        Scanner sc = new Scanner(new File("test.txt"));
                         System.out.println(sc.nextLine());
                         fw.close();
                     }catch (FileNotFoundException e){

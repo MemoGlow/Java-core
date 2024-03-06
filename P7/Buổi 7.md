@@ -159,3 +159,4 @@
 ### 5. Cách sử dụng của Interface và Abstract Class.
  - Khi một nhóm đối tượng có cùng bản chất kế thừa từ một class thì sử dụng abstract class. 
  - Khi một nhóm đối tượng không có cùng bản chất nhưng chúng có hành động giống nhau thì sử dụng interface.
+ 
