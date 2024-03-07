@@ -1,37 +1,44 @@
--import java.util.ArrayList;
+import java.util.ArrayList;
 
-public class Main{
-    public static void main(String[] args) {
+    public class Main{
+        public static void main(String[] args) {
+            Rectangle rec = new Rectangle();
 
-    }
-};
-class LocalData implements Data{
-    ArrayList<String> userNameList;
-    public boolean findUserByName(String name) {
-        for(String userName : userNameList){
-            if(userName.equals(name)) return true;
+            System.out.println(rec.area());
         }
-        return false;
-    }
+    };
+interface Shape{
+    int area();
 }
-class GlobalData implements Data{
+class Square implements Shape{
+    private int size;
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     @Override
-    public boolean findUserByName(String name) {
-        return false;
+    public int area() {
+        return size * size;
     }
 }
-interface Data{
-    boolean findUserByName(String name);
-}
-class UserSevice{
-    Data data;
-    boolean authenticateUserName(String userName){
-        return data.findUserByName(userName);
+class Rectangle implements Shape{
+    private int width;
+    private int height;
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    @Override
+    public int area() {
+        return width * height;
     }
 }
-
-
-
 
 
 
