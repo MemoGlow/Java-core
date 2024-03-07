@@ -157,12 +157,29 @@
         - Trong một chương trình, các object của class con có thể thay thế class cha mà không làm thay đổi tính đúng đắn của chương trình. 
         - Khi ghi đè một phương thức, thì chúng ta nên mở rộng phương thức ban đầu thay vì thay thế nó bằng một phương thức hoàn toàn khác.
     - Một số yêu cầu:
-        - Tham số trong class con nên bằng hoặc trừu tượng hơn so với tham số trong class cha.
-        - Kiểu trả về của class con phải = hoặc là kiểu con của kiểu trả về của class cha.
-        - Phương thức ở class con không nên ném ra ngoại lệ mà phương thức cha không có khả năng ném ra.
+        - Tham số trong phương thức của class con khi ghi đè nên bằng hoặc trừu tượng hơn so với tham số trong class cha.
+            - Ví dụ: 
+                ```Java
+                class Animal{}
+                class Cat extends Animal{}
+                class Human{
+                    public void feed(Cat c){
+                        System.out.println("Human feed cat");
+                    }
+                }
+                class Farmer extends Human{
+                    public void feed(Animal c){
+                        System.out.println("Hunan feed animal");
+                    }
+                }
+                
+                ```
+        - Kiểu trả về trong phương thức của class còn phải bằng hoặc là kiểu dữ liệu con của kiểu trả về trong phương thức của class cha.
+            - Ví dụ phương thức buyCat() trong class cha sẽ trả về Cat. Khi ghi đè phương thức buyCat() trong class con mà trả về Animal thì sẽ sai về mặt logic.
+        - Phương thức trong class con không nên ném ra ngoại lệ mà phương thức trong class cha không có khả năng ném ra.
         - Class con không nên thu hẹp lại điều kiện ban đầu.
         - Class con không nên làm yếu đi điều kiện sau.
-        - Các tính chất bất biến của class chả phải được giữ nguyên.
+        - Các tính chất bất biến của class phải được giữ nguyên.
     - Ví dụ:
         - VD1:
             ```Java
@@ -231,7 +248,7 @@
                 }
             };
             ```
-            - Đoạn code trên đã vi phạm quy tắc bởi LSP bới hai phương thức setHeight và setWidth của class Square có cách thức thực hiện khác so với class Rectangle. 
+            - Đoạn code trên đã vi phạm quy tắc LSP bới hai phương thức setHeight và setWidth của class Square có cách thức thực hiện khác so với class Rectangle. 
             - Hệ quả là khi ta thực hiện phương thức Area như đoạn code trên thì sẽ xuất hiện kết quả không như mong muốn.
             - Chúng ta sẽ xử lí bằng cách tạo một interface Shape để Square và Rectangle implement.
             ```Java
@@ -325,7 +342,7 @@
             - Trong ví dụ trên, class UserService phụ thuộc trực tiếp vào class Data.
             - Khi class Data có thay đổi thì ta cũng sẽ phải chỉnh sửa class UserService,  vi phạm quy tắc DIP.
             - Để giải quyết ta sẽ làm cho class UserService sẽ phụ thuộc vào interface Data. Bên cạnh đó ta cũng sẽ tạo một class Data khác implement từ class Data.
-            ```Java
+            ``` Java
             class GlobalData implements Data{
                 public boolean findUserByName(String name) {
                     return true;
@@ -362,6 +379,11 @@
     - MVC chia thành ba phần được kết nối với nhau và mỗi thành phần đều có một nhiệm vụ riêng của nó và độc lập với các thành phần khác.
     - MVC được sử dụng roognj rãi trong phát triển Web.
     ![Mô hình MVC](image.png)
+1. Đặc điểm của MVC.
+    - Cung cấp sự phân tách rõ ràng giữa logic nghiệp vụ, logic UI và logic đầu vào.
+    - Hỗ trợ lập trình trên thử nghiệm.
+    - Có thể sử dụng để xây dựng các ứng dụng có URL dễ hiểu và có thể tìm kiếm được.
+    - Cung cấp toàn quyền kiểm soát HTML và URL, giúp bạn dễ dàng thiết kế kiến trúc ứng dụng web.
 1. Các thành phần trong MVC.
     - Model:
         - Có nhiệm vụ thao tác với Database.
@@ -374,10 +396,24 @@
     - Controller:
         - Là thành phần trung gian giữa Model và View.
         - Đảm nhận vai trò tiếp nhận yêu cầu từ người dùng thông qua Model để lấy dữ liệu sau đó thông qua View để hiển thị cho người dùng.
+    ![alt text](image-1.png)
+1. Ví dụ về cách hoạt động và trách nhiệm của MVC.
+    - Giả sử khi bạn đến nhà hàng.
+        - Bạn sẽ không vào bếp và chuẩn bị đồ ăn mà thay vào đó, bạn ngồi và đợi người phục vụ tới.
+        - Người phục vụ đến chỗ bạn và gọi đồ ăn. Người phục vụ không biết bạn là ai và bạn muốn gì, anh ta chỉ viết ra chi tiết món ăn của bạn. Sau đó người phục vụ di chuyển vào bếp.
+        - Trong bếp, người phục vụ không chuẩn bị thức ăn cho bạn. Đầu bếp chuẩn bị thức ăn cho bạn. Người phục vụ đưa đơn đặt hàng của bạn cho đầu bếp cùng với số bàn của bạn. Anh ta sử dụng các nguyên liệu từ trong tủ lạnh để nấu thức ăn.
+        - Sau khi thực hiện xong, đầu bếp bàn giao lại thực ăn cho người phục vụ. Công việc của người phục vụ là di chuyển thức ăn này từ bếp ra bàn. Người phục vụ đã xác định được bạn và biết bạn đã gọi món nào.
+        - Qua ví dụ trên, có thể xác định kiến trúc MVC như sau.
+            - View = bạn.
+            - Controller = người phục vụ.
+            - Model = đầu bếp.
+            - Data = tủ lạnh.
 1. Luồng xử lý trong MVC.
     - Đầu tiên là Request từ người dùng gửi từ Client đến server.
-    - Sau đó Controller dựa vào yêu cầu của người dùng tiến hành giao tiếp với MOdel để lấy data từ database.
+    - Sau đó Controller dựa vào yêu cầu của người dùng tiến hành giao tiếp với M0del để lấy data từ database.
     - Cuối cùng Controller gửi dữ liệu vừa lấy được về view và hiển thị ra cho người dùng trên trình duyệt.
+    ![Mô hình MVC](image-2.png)
+    ![Mô hình MVC tiếp cận theo tuyến tính](image-3.png)
 
 
 
