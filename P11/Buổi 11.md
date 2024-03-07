@@ -37,8 +37,7 @@
         - Theo nguyên tắc này, chúng ta không được thay đổi hiện trạng của lớp có sẵn, nếu muốn thêm tính năng, thì ta sẽ mở rộng class cũ bằng cách kế thừa để xây dựng class mới.
         - Nguyên tắc này giúp duy trì được tính ổn định của chương trình bởi khi đó code sử dụng class nguồn sẽ được giữ nguyên, cách hoạt động của nó sẽ không đổi.
         - Tuy nhiên khi thực hiện nguyên tắc này cần lưu ý về ý nghĩa của các chức năng, tránh tạo ra quá nhiều class dẫn xuất.
-    - Ví dụ về class Order.
-        - #include
+    - Ví dụ:
         ```Java
         class Order{
             public String shipping;
@@ -105,6 +104,7 @@
                 System.out.println(order.getCost());
             }
         };
+        ```
         - VD2
         ``` Java
         class Animal{
