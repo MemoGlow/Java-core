@@ -242,6 +242,26 @@
         - clearSelection() – Bỏ chọn tất cả các cột và hàng trước đó đã được chọn.
     - Sắp xếp trong JTable.
     - Filter trong JTable.
+- Ví dụ:
+    ```Java
+    public class Main {
+        public static void main(String[] args) {
+            JFrame f = new JFrame("Bang");
+            f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            f.setSize(300, 300);
+            f.setLocation(50, 50);
+            f.setLayout(new FlowLayout());
+            String[][] data = {{"Hiep", "18", "TG"}, {"Khong phai Hiep", "0", "Nowhere"}};
+            String[] column = {"Name", "Age", "Location"};
+            JTable table = new JTable(data, column);
+            table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+            table.setVisible(true);
+            f.add(table);
+            f.setVisible(true);
+        }
+    }
+    ```
+    ![Minh họa bảng](image-13.png)
 ### JList
 - Jlist được sử dụng để hiển thị một tập hợp các phần tử và cho phép người dùng có thể chọn hoặc nhiều phần tử trong số chúng.
 - Một số thao tác trong JList.
@@ -251,18 +271,120 @@
     - Multiple select trong JList.
     - Custom JList để hiện thị một Object.
     - Tạo JList với các phần tử là checkbox.
+- Ví dụ:
+    ```Java
+    public class Main {
+        public static void main(String[] args) {
+            JFrame f = new JFrame("Danh sach");
+            f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            
+            String[] status = {"Ngủ", "Không ngủ", "Không Không Ngủ", "Không Không Không ngủ"};
+            JList list = new JList(status);
+            list.setVisibleRowCount(3);
+            f.add(list);
+
+            list.addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    list.setSelectionBackground(Color.yellow);
+                    list.setVisible(true);
+                }
+            });
+
+            JScrollPane scroll = new JScrollPane(list);
+            f.add(scroll, BorderLayout.NORTH);
+            list.setFixedCellHeight(25);
+            list.setSize(100, 100);
+            list.setFixedCellWidth(100);
+            
+            f.setSize(300, 300);
+            f.setLocation(50, 50);
+            f.setVisible(true);
+        }
+    }
+    ```
+    ![Minh họa JList](image-14.png)
+### Chương trình hiển thị ngày giờ hiện tại.
+```Java
+public class Main {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Thời gian hiện tại");
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        JLabel label = new JLabel("Thời gian hiện tại là: " + (new java.util.Date()).toString());
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        f.add(label, BorderLayout.CENTER);
+
+        JButton button = new JButton("Cập nhật thời gian");
+        f.add(button, BorderLayout.SOUTH);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label.setText("Thời gian hiện tại là: " + (new java.util.Date()).toString());
+                label.setVisible(true);
+            }
+        });
+
+        f.setLocation(50, 50);
+        f.setSize(300, 300);
+        f.setVisible(true);
+    }
+}
+```
+![Chương trình cập nhật ngày giờ](image-15.png)
 ## BorderLayout, FlowLayout, GridLayout
 ### BorderLayout.
 - BorderLayout tổ chức các thành phần con thành 5 vùng NORTH, SOUTH, EAST, WEST and CENTER. Ở mỗi vùng chỉ có thể chứa tối đa một thành phần con, khi thêm các phần tử khác nhau vào BorderLayout bạn cần chỉ định 1 trong 5 vùng trên.
 ![Minh họa BorderLayout](image-4.png)
 ### FlowLayout.
 - FlowLayout bố trí các thành phần con theo hướng từ trái sang phải hoặc từ phải sang trái trên cùng một dòng. Nếu tất cả các thành phần con không thể chứa trên cùng một dòng so với chiều dài tối đa của container thì chúng sẽ được sắp xếp trên một hàng mới.
+```Java
+public class Main {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Các nút");
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        f.setLayout(new FlowLayout());
+        JButton b1 = new JButton("b1");
+        JButton b2 = new JButton("b2");
+        JButton b3 = new JButton("b3");
+        f.add(b1);
+        f.add(b2);
+        f.add(b3);
+        f.setLocation(50, 50);
+        f.setSize(300, 300);
+        f.setVisible(true);
+    }
+}
+```
+![Minh họa FlowLayout 1](image-16.png)
+![Minh họa FlowLayout 2](image-17.png)
+
+
 ### GridLayout.
-- GridLayout được sử dụng để bố trí các thành phần trong một lưới hình chữ nhật, lưới này đã được chia thành các hình chữ nhật có kích thước bằng nhau và một thành phần được đặt trong mỗi hình chữ nhật. Chúng ta có thể khởi tạo GridLayout thông qua các constructor sau:
+- GridLayout được sử dụng để bố trí các thành phần trong một lưới hình chữ nhật, lưới này đã được chia thành các hình chữ nhật có kích thước bằng nhau và một thành phần được đặt trong mỗi hình chữ nhật. 
+```Java
+public class Main {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Các nút");
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        f.setLayout(new GridLayout(2, 2));
+        JButton b1 = new JButton("b1");
+        JButton b2 = new JButton("b2");
+        JButton b3 = new JButton("b3");
+        f.add(b1);
+        f.add(b2);
+        f.add(b3);
+        f.setLocation(50, 50);
+        f.setSize(300, 300);
+        f.setVisible(true);
+    }
+}
+```
+![Minh họa GridLayout](image-18.png)
 ## Graphics2D, Image.
 ### Graphics2D.
-    - là lớp trừu tượng kế thừa từ lớp Graphics, hỗ trợ nhiều công cụ để vẽ và xuất ra hình ảnh, văn bản… trên hình dạng 2 chiều
-    - Được sử dụng trong việc ghi đè phương thức paint(đối với container) và paintComponent(đối với component). Khi này ta có thể thiết kế để thành phần nhìn đẹp mắt hơn
+- là lớp trừu tượng kế thừa từ lớp Graphics, hỗ trợ nhiều công cụ để vẽ và xuất ra hình ảnh, văn bản… trên hình dạng 2 chiều
+- Được sử dụng trong việc ghi đè phương thức paint(đối với container) và paintComponent(đối với component). Khi này ta có thể thiết kế để thành phần nhìn đẹp mắt hơn
 ### Image 
-    - là lớp trừu tượng cha cho tất cả các lớp dùng để hiển thị hình ảnh như BufferedImage, Im	ageIcon…
+- là lớp trừu tượng cha cho tất cả các lớp dùng để hiển thị hình ảnh như BufferedImage, Im	ageIcon…
 
