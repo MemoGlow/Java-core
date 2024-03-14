@@ -385,6 +385,27 @@ public class Main {
 ### Graphics2D.
 - là lớp trừu tượng kế thừa từ lớp Graphics, hỗ trợ nhiều công cụ để vẽ và xuất ra hình ảnh, văn bản… trên hình dạng 2 chiều
 - Được sử dụng trong việc ghi đè phương thức paint(đối với container) và paintComponent(đối với component). Khi này ta có thể thiết kế để thành phần nhìn đẹp mắt hơn
+```Java
+class DrawingPanel extends JPanel{
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        Rectangle2D rect = new Rectangle2D.Double(100, 100, 100, 100);
+        g2d.draw(rect);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Demo");
+        f.setSize(300, 300);
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        f.add(new DrawingPanel());
+        f.setVisible(true);
+    }
+}
+```
+![Graphics2D](image-19.png)
 ### Image 
-- là lớp trừu tượng cha cho tất cả các lớp dùng để hiển thị hình ảnh như BufferedImage, Im	ageIcon…
+- là lớp trừu tượng cha cho tất cả các lớp dùng để hiển thị hình ảnh như BufferedImage, ImageIcon…
 
