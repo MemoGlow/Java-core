@@ -5,19 +5,23 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
+
+class DrawingPanel extends JPanel{
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        Rectangle2D rect = new Rectangle2D.Double(100, 100, 100, 100);
+        g2d.draw(rect);
+    }
+}
 public class Main {
     public static void main(String[] args) {
-        JFrame f = new JFrame("Các nút");
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setLayout(new GridLayout(2, 2));
-        JButton b1 = new JButton("b1");
-        JButton b2 = new JButton("b2");
-        JButton b3 = new JButton("b3");
-        f.add(b1);
-        f.add(b2);
-        f.add(b3);
-        f.setLocation(50, 50);
+        JFrame f = new JFrame("Demo");
         f.setSize(300, 300);
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        f.add(new DrawingPanel());
         f.setVisible(true);
     }
 }
